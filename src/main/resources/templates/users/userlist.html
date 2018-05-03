@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::site-head">
+    <title>ItBlogNet</title>
+</head>
+<body>
+
+<header th:replace="layout::site-header"/>
+
+<h1>All Registered Users</h1>
+
+<div class="container">
+
+    <div class="box post" th:each="u : ${allUsers}">
+        <div>
+            <a th:href="@{/users/userPost/{id}/(id=${u.id})}"><i th:text="${u.username}"></i></a>
+            <div>
+                <span th:text="${u.email}"></span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<footer th:replace="layout :: site-footer"/>
+
+
+</body>
+</html>

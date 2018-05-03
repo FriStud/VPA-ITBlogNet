@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::site-head">
+    <title>Register</title>
+</head>
+<body>
+
+<header th:replace="layout::site-header"/>
+
+<h1>Register to the ITBlognet</h1>
+
+<form id="fromula" method="post" th:object="${registerFormula}" class="box box-auth">
+    <div><label for="userName">Username:</label> </div>
+    <input id="userName" type="text" name="userName" th:value="*{userName}" placeholder="User Name"/>
+    <span class="formError" th:if="${#fields.hasErrors('userName')}" th:onerror="*{userName}">Invalid userName</span>
+
+    <div><label for="pass" >Password:</label> </div>
+    <input id="pass" type="password" name="pass" th:value="*{pass}" placeholder="Password"/>
+    <span class="formError" th:if="${#fields.hasErrors('pass')}" th:onerror="*{pass}">Invalid password</span>
+
+    <div><label for="rePass">Possword check:</label> </div>
+    <input id="rePass" type="password" name="rePass" th:value="*{rePass}" placeholder="Recap Password"/>
+    <span class="formError" th:if="${#fields.hasErrors('rePass')}" th:onerror="*{rePass}">Invalid confirmation of password</span>
+
+    <div><label for="email">Your valid email address:</label> </div>
+    <input id="email" type="email" name="email" th:value="*{email}" placeholder="Email Address"/>
+    <span class="formError" th:if="${#fields.hasErrors('email')}" th:onerror="*{email}" >Invalid email</span>
+
+    <div class="btncontainer">
+        <input id="regbtn" type="submit" value="Register"/>
+    </div>
+</form>
+
+<footer th:replace="layout::site-footer"/>
+
+</body>
+</html>

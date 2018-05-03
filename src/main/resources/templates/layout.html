@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head th:fragment="site-head">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../public/css/style.css" th:href="@{/css/style.css}"/>
+        <link rel="stylesheet" href="../public/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" href="../public/css/main.css" th:href="@{/css/main.css}"/>
+        <link rel="stylesheet" href="../public/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}"/>
+        <link rel="stylesheet" href="../public/css/font-awesome.css" th:href="@{/css/font-awesome.css}"/>
+        <title>Default Title</title>
+    </head>
+    <body>
+        <header th:fragment="site-header" th:remove="tag">
+            <header class="largerfont">
+                <a href="index.html" th:href="@{/}">Home</a>
+                <a href="users/login.html" th:href="@{/users/login}">Login</a>
+                <a href="users/register.html" th:href="@{/users/register}">Register</a>
+                <a href="blog/blog.html" th:href="@{/blog/blog}">Blog</a>
+                <a href="users/userlist.html" th:href="@{/users/userlist}">Users</a>
+                <script src="../public/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+                <script src="../public/js/app.js" th:src="@{/js/app.js}"></script>
+                <script src="../public/js/scripts.js" th:src="@{/js/scripts.js}"></script>
+                <script src="../public/js/notification.js" th:src="@{/js/notification.js}"></script>
+            </header>
+
+            <ul id="messages" th:with="notifyMessages=${session[T(it_blog_net.ITBlogNet.Services.NotificationService).NOTIFY_MSG_SESSION_KEY]}">
+                <li th:each="msg : ${notifyMessages}" th:text="${msg.text}"
+                    th:class="${#strings.toLowerCase(msg.type)}">
+                </li>
+                <span th:if="${notifyMessages != null}" th:remove="all" th:text="${#session.setAttribute(T(it_blog_net.ITBlogNet.Services.NotificationService).NOTIFY_MSG_SESSION_KEY,null)}"></span>
+            </ul>
+
+        </header>
+
+        <footer th:fragment="site-footer">
+
+            <div>
+                <i>Date of : <b th:text="${#dates.format(#execInfo.now.time,'dd/MM/yyyy')}"></b></i>
+            </div>
+
+            <span class="btncontainer">&copy; H&W 2018</span>
+            <span th:if="${#session.getAttribute('loggedUser') != null}">
+                <i th:text="| Logged as : ${(#session.getAttribute('userName'))}|"></i>
+                <div>
+                    <i><a th:href="@{/users/logout}">LOG OUT</a></i>
+
+                </div>
+            </span>
+        </footer>
+
+    </body>
+</html>

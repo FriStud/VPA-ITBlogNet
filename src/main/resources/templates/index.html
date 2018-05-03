@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::site-head">
+    <title>ItBlogNet</title>
+</head>
+<body>
+
+<header th:replace="layout::site-header"/>
+    <h1>Welcome to ItBlogNet web page</h1>
+
+
+<main>
+
+    <section class="box post-list">
+        <article  class="post" th:each="p : ${allposts}">
+            <header class="post-header">
+                <h2>
+                    <a  th:href="@{/posts/view/{id}/(id=${p.id})}" th:text="${p.title}"></a>
+                    <time>
+                        <small th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">01-May-2018</small>
+                    </time>
+                </h2>
+            </header>
+
+            <div class="post-content">
+                <p th:text="${p.tesser}">No teaser avaible</p>
+            </div>
+
+            <div class="footer post-footer">
+                <a  th:href="@{/posts/view/{id}/(id=${p.id})}" > read more</a>
+            </div>
+
+        </article>
+
+</main>
+
+<footer th:replace="layout :: site-footer"/>
+
+
+</body>
+</html>

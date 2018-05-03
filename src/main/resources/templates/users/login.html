@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::site-head">
+    <title>Login</title>
+</head>
+<body>
+
+<header th:replace="layout::site-header"/>
+
+<h1>Login in the ITBlogNet</h1>
+
+<form  id="fromula" method="post" th:object="${login}" class="box box-auth">
+    <div><label for="userName">Username:</label> </div>
+    <input id="userName" type="text" name="userName" th:value="*{userName}" placeholder="User Name"/>
+    <span class="formError" th:if="${#fields.hasErrors('userName')}" th:onerror="*{userName}">Invalid userName</span>
+
+    <div><label for="pass" >Password:</label> </div>
+    <input id="pass" type="password" name="pass" th:value="*{pass}" placeholder="Password"/>
+    <span class="formError" th:if="${#fields.hasErrors('pass')}" th:onerror="*{pass}">Invalid password</span>
+
+    <div>
+        <i > Remember me ? <input class="noblock" type="checkbox" name="remember" value="true" th:value="*{rememberMe}"/></i>
+    </div>
+    <a href="register.html" th:href="@{/users/register}">[Not registered yet? Go To Register]</a>
+
+    <div>
+        <input id="regbtn" type="submit" value="Login" />
+    </div>
+</form>
+<footer th:replace="layout::site-footer"/>
+
+</body>
+</html>
